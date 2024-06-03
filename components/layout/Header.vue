@@ -161,7 +161,14 @@
     </div>
 
     <div class="header__lang">
-      <button>RU</button>
+      <button class="header__lang-btn">
+        <Icon name="system-uicons:globe" />
+        <span>RU</span>
+      </button>
+
+<!--      <div>-->
+<!--        -->
+<!--      </div>-->
     </div>
   </div>
 </template>
@@ -172,10 +179,27 @@ export default { name: "Header" };
 
 <script setup></script>
 
-<style scoped>
+<style scoped lang="scss">
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 15px;
+
+  &__lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+
+
+    &:hover {
+      background: white;
+    }
+  }
 }
 </style>
