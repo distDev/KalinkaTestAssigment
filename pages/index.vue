@@ -4,15 +4,10 @@
 
     <section class="main__content" ref="mainContentRef">
       <Filters @search="(filters) => handleSearch(filters)" />
-      <Apartments />
-      <AdBanner />
+      <Apartments v-if="store.apartments" />
     </section>
   </main>
 </template>
-
-<script>
-export default { name: "index" };
-</script>
 
 <script setup>
 import MainBanner from "~/components/main/MainBanner.vue";
@@ -43,8 +38,19 @@ const handleSearch = async (filters) => {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 40px;
     align-items: start;
+  }
+
+  @media (max-width: 575px) {
+    gap: 25px;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: normal;
+    }
+
   }
 }
 </style>

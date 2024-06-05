@@ -7,7 +7,7 @@ export const useMainStore = defineStore("main", {
     return {
       filters: {
         page: 1,
-        sort: null,
+        sort: 'price',
         price: {
           min: null,
           max: null,
@@ -23,7 +23,7 @@ export const useMainStore = defineStore("main", {
   },
   actions: {
     async getApartments() {
-      const { data } = await ApartmentsApi.getApartments({
+      const data = await ApartmentsApi.getApartmentList({
         page: this.filters.page,
         types: this.filters.types,
         price: this.filters.price,
@@ -35,7 +35,7 @@ export const useMainStore = defineStore("main", {
 
     async changePage(page) {
       this.filters.page = page;
-      await this.getApartments();
+      await this.getApartments()
     },
 
     async searchApartments(filters) {

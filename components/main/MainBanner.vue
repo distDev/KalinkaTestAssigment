@@ -16,5 +16,9 @@ export default {name: "MainBanner"}
   height: 500px;
   background: #000;
   border-radius: 10px;
+
+  @media (max-width: 575px) {
+    height: 300px;
+  }
 }
 </style>

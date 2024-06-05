@@ -1,5 +1,7 @@
 <template>
-  <div class="card-image"></div>
+  <div class="card-image">
+    <img :src="images[0]" alt="">
+  </div>
 </template>
 
 <script>
@@ -7,18 +9,24 @@ export default { name: "ApartmentCardImage" };
 </script>
 
 <script setup>
-const props = defineProps({
+ defineProps({
   images: Array
 })
 </script>
 
 <style scoped lang="scss">
 .card-image {
-  min-width: 270px;
-  width: 270px;
+  min-width: 320px;
+  width: 320px;
   height: 100%;
   border-radius: 8px;
   overflow: hidden;
-  background: #e86d6d;
+  background: #dcdcdc;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 </style>

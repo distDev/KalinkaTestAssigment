@@ -1,17 +1,19 @@
 <template>
   <div class="pagination">
     <button
-      class="pagination__item"
+      class="pagination__button"
       :disabled="!prev"
       @click="$emit('changePage', prev)"
     >
       <Icon name="system-uicons:chevron-left" />
     </button>
 
-    <p>{{ prev ? prev + 1 : first }} / {{ last }}</p>
+    <div class="pagination__page">
+      <p>{{ prev ? prev + 1 : first }} из {{ last }}</p>
+    </div>
 
     <button
-      class="pagination__item"
+      class="pagination__button"
       :disabled="!next"
       @click="$emit('changePage', next)"
     >
@@ -49,9 +51,22 @@ defineProps({
 <style scoped lang="scss">
 .pagination {
   display: flex;
-  gap: 5px;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  height: 40px;
 
-  &__item {
+  &__button {
+    background: white;
+    border: none;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  &__page {
+    padding: 0 10px;
+    border-left: 1px solid #E1E5EC;
+    border-right: 1px solid #E1E5EC;
   }
 }
 </style>
