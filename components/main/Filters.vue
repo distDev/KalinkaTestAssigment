@@ -87,7 +87,6 @@ const store = useMainStore();
 
 const isFormOpen = ref(false);
 const form = ref({
-  page: 1,
   sort: store.filters.sort,
   price: {
     min: store.filters.price.min,

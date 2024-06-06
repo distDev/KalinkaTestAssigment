@@ -48,6 +48,7 @@ export const useMainStore = defineStore("main", {
 
     async searchApartments(filters) {
       this.filters = filters;
+      this.filters.page = 1
       await this.getApartments();
     },
 
