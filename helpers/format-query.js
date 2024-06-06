@@ -2,10 +2,10 @@ export const formatQuery = ({ page, types, price, sort }) => {
   const config = useRuntimeConfig();
 
   let priceQuery = "";
-  if (price.min !== null) {
+  if (price.min) {
     priceQuery += `price_gte=${price.min}&`;
   }
-  if (price.max !== null) {
+  if (price.max) {
     priceQuery += `price_lte=${price.max}&`;
   }
 
