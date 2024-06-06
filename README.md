@@ -1,75 +1,26 @@
-# Nuxt 3 Minimal Starter
+Тестовое задание для Kalinka - Realty
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Посмотреть можно тут: https://kalinka-test-assigment.vercel.app/
 
-## Setup
+Что было сделано: 
 
-Make sure to install the dependencies:
+1) Фильтрация по типу/цене недвижимости
+2) Сортировка по цене
+3) Пагинация на главной странице
+4) Переключение языка 
+5) Дизайн 2 страниц (простенький) 
+6) Адаптация 2 страниц под мобильные устройства 
 
+
+Запустить проект локально
 ```bash
-# npm
+# Устанавливаем зависимости
 npm install
 
-# pnpm
-pnpm install
+# Запускаем клиентскую часть
+npm run dev 
 
-# yarn
-yarn install
+# Запускаем json server на отдельном порту 
+json-server -p 4000 db.json
 
-# bun
-bun install
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
