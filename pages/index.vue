@@ -4,7 +4,7 @@
 
     <section class="main__content" ref="mainContentRef">
       <Filters @search="(filters) => handleSearch(filters)" />
-      <Apartments v-if="store.apartments" />
+      <Apartments />
     </section>
   </main>
 </template>
@@ -20,12 +20,20 @@ const mainContentRef = ref(null);
 
 const store = useMainStore();
 
+// вынес функцию в родительский элемент, чтобы при поиске происходил scroll наверх
 const handleSearch = async (filters) => {
   await store.searchApartments(filters);
   if (mainContentRef.value) {
     mainContentRef.value.scrollIntoView({ behavior: "smooth" });
   }
 };
+
+useHead({
+  title: 'Агентство тестовой недвижимости - Kalinka тестовое',
+  meta: [
+    { name: 'description', content: 'Какое то описание' }
+  ],
+})
 </script>
 
 <style scoped lang="scss">
@@ -40,10 +48,14 @@ const handleSearch = async (filters) => {
     display: flex;
     gap: 40px;
     align-items: start;
+
+    @media (max-width: 575px) {
+      gap: 15px;
+    }
   }
 
   @media (max-width: 575px) {
-    gap: 25px;
+    gap: 35px;
 
     &__content {
       display: flex;

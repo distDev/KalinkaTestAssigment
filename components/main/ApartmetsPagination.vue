@@ -2,20 +2,20 @@
   <div class="pagination">
     <button
       class="pagination__button"
-      :disabled="!prev"
-      @click="$emit('changePage', prev)"
+      :disabled="!store.apartmentList.links.prev"
+      @click="$emit('changePage', store.apartmentList.links.prev)"
     >
       <Icon name="system-uicons:chevron-left" />
     </button>
 
     <div class="pagination__page">
-      <p>{{ prev ? prev + 1 : first }} из {{ last }}</p>
+      <p>{{ pageCount }}</p>
     </div>
 
     <button
       class="pagination__button"
-      :disabled="!next"
-      @click="$emit('changePage', next)"
+      :disabled="!store.apartmentList.links.next"
+      @click="$emit('changePage', store.apartmentList.links.next)"
     >
       <Icon name="system-uicons:chevron-right" />
     </button>
@@ -27,24 +27,14 @@ export default { name: "ApartmentsPagination" };
 </script>
 
 <script setup>
+import { useMainStore } from "~/store/main-store.js";
+
 defineEmits(["changePage"]);
-defineProps({
-  first: {
-    type: Number,
-    required: true,
-  },
-  prev: {
-    type: Number,
-    required: false,
-  },
-  next: {
-    type: Number,
-    required: false,
-  },
-  last: {
-    type: Number,
-    required: true,
-  },
+
+const store = useMainStore();
+
+const pageCount = computed(() => {
+  return `${store.apartmentList.links.prev ? store.apartmentList.links.prev + 1 : store.apartmentList.links.first} из ${store.apartmentList.links.last}`;
 });
 </script>
 
@@ -65,8 +55,8 @@ defineProps({
 
   &__page {
     padding: 0 10px;
-    border-left: 1px solid #E1E5EC;
-    border-right: 1px solid #E1E5EC;
+    border-left: 1px solid #e1e5ec;
+    border-right: 1px solid #e1e5ec;
   }
 }
 </style>

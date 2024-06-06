@@ -1,10 +1,10 @@
 <template>
   <div class="slider-controls">
-    <button @click="swiper.slidePrev()">
-      <Icon name="system-uicons:chevron-left" size="24"/>
+    <button :disabled="swiper.isBeginning" @click="swiper.slidePrev()">
+      <Icon name="system-uicons:chevron-left" size="24" />
     </button>
 
-    <button @click="swiper.slideNext()">
+    <button :disabled="swiper.isEnd" @click="swiper.slideNext()">
       <Icon name="system-uicons:chevron-right" size="24" />
     </button>
   </div>
@@ -24,8 +24,9 @@ const swiper = useSwiper();
 .slider-controls {
   width: 90%;
   position: absolute;
-  bottom: 50%;
-  left: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
   z-index: 100;
@@ -37,6 +38,15 @@ const swiper = useSwiper();
     color: black;
     border: none;
     border-radius: 50%;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 575px) {
+    display: none;
   }
 }
 </style>

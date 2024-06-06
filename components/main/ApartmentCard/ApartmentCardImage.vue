@@ -28,5 +28,11 @@ export default { name: "ApartmentCardImage" };
     height: 100%;
     object-fit: cover;
   }
+
+  @media (max-width: 575px) {
+    min-width: 100%;
+    width: 100%;
+    height: 120px;
+  }
 }
 </style>

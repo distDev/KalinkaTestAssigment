@@ -1,10 +1,10 @@
 <template>
-  <div v-if="apartments.data?.data" class="apartments" ref="apartmentsWrapper">
-    <p>Найдено: {{ apartments.data.items }}</p>
+  <div v-if="apartments.data" class="apartments" ref="apartmentsWrapper">
+    <p>Найдено: {{ apartments.totalCount ? apartments.totalCount : 0}}</p>
 
-    <div class="apartments__cards">
+    <div v-if="apartments.data.length" class="apartments__cards">
       <ApartmentCard
-        v-for="apartment in apartments.data.data"
+        v-for="apartment in apartments.data"
         :key="apartment.id"
         :title="apartment.title[store.lang]"
         :description="apartment.description[store.lang]"
@@ -15,12 +15,12 @@
       />
     </div>
 
-    <div class="apartments__pagination">
+    <div v-else>
+      <h2>Ничего не найдено</h2>
+    </div>
+
+    <div v-if="apartments.data.length" class="apartments__pagination">
       <ApartmentsPagination
-          :first="apartments.data.first"
-          :last="apartments.data.last"
-          :next="apartments.data.next"
-          :prev="apartments.data.prev"
           @change-page="(page) => changePage(page)"
       />
     </div>
@@ -50,7 +50,7 @@ const changePage = async (page) => {
 };
 
 const apartments = computed(() => {
-  return store.apartments;
+  return store.apartmentList;
 });
 
 await useAsyncData(() => store.getApartments());
@@ -68,11 +68,18 @@ await useAsyncData(() => store.getApartments());
     display: grid;
     grid-template-columns: 1fr;
     gap: 25px;
+
+    @media (max-width: 575px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
   }
 
   &__pagination {
     display: flex;
     justify-content: center;
   }
+
+
 }
 </style>

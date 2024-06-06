@@ -160,15 +160,26 @@
       </NuxtLink>
     </div>
 
-    <div class="header__lang">
-      <button class="header__lang-btn">
+    <div class="header__lang" v-outside="() => (isPopupVisible = false)">
+      <button
+        class="header__lang-btn"
+        @click.prevent="isPopupVisible = !isPopupVisible"
+      >
         <Icon name="system-uicons:globe" />
-        <span>RU</span>
+        <span>{{ store.lang.toUpperCase() }}</span>
       </button>
 
-<!--      <div>-->
-<!--        -->
-<!--      </div>-->
+      <div v-if="isPopupVisible" class="header__lang-popup">
+        <button
+          v-for="lang in langList"
+          :key="lang"
+          class="header__lang-popup-item"
+          :class="{ active: store.lang === lang }"
+          @click="handleSwitchLang(lang)"
+        >
+          {{ lang.toUpperCase() }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -177,28 +188,80 @@
 export default { name: "Header" };
 </script>
 
-<script setup></script>
+<script setup>
+import { useMainStore } from "~/store/main-store.js";
+
+const isPopupVisible = ref(false);
+const langList = ref(["ru", "en"]);
+
+const store = useMainStore();
+
+const handleSwitchLang = (lang) => {
+  if (store.lang === lang) {
+    return;
+  }
+
+  store.switchLang(lang);
+  isPopupVisible.value = false;
+};
+</script>
 
 <style scoped lang="scss">
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
+  padding: 15px 0;
 
-  &__lang-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 6px;
+  &__lang {
+    position: relative;
 
+    &-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 500;
 
-    &:hover {
+      &:hover {
+        background: white;
+      }
+    }
+
+    &-popup {
+      position: absolute;
+      top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
       background: white;
+      border-radius: 6px;
+      width: 60px;
+      padding: 6px;
+      z-index: 100;
+      box-shadow: 0 4px 17px 0 rgba(0, 0, 0, 0.13);
+    }
+
+    &-popup-item {
+      width: 100%;
+      border-radius: 4px;
+      padding: 3px 6px;
+      background: none;
+      border: none;
+      text-align: start;
+      cursor: pointer;
+
+      &.active {
+        background: #efefef;
+      }
+
+      &:hover {
+        background: #efefef;
+      }
     }
   }
 }
