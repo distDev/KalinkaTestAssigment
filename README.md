@@ -2,6 +2,8 @@
 
 Посмотреть можно тут: https://kalinka-test-assigment.vercel.app/
 
+Стек: Nuxt 3, Pinia, JS, SCSS, Swiper
+
 Что было сделано: 
 
 1) Фильтрация по типу/цене недвижимости
